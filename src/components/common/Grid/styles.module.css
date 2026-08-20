@@ -1,0 +1,56 @@
+.gridWrapper {
+  overflow-x: auto;
+  margin-top: 1rem;
+}
+
+.grid {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.th {
+  background-color: #E3F2FD; /* azul claro */
+  padding: 0.8rem 0.6rem;
+  text-align: left;
+  font-weight: 600;
+  color: #1565C0;
+  border-bottom: 2px solid #BBDEFB;
+}
+
+.thActions {
+  text-align: center;
+}
+
+.tr {
+  border-bottom: 1px solid #eee;
+}
+
+.tr:nth-child(even) {
+  background-color: #F9FAFB;
+}
+
+.td {
+  padding: 0.7rem 0.6rem;
+  vertical-align: middle;
+}
+
+.tdActions {
+  padding: 0.5rem 0.4rem;
+  text-align: center;
+}
+
+.actionButtons {
+  display: flex;
+  gap: 0.3rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.emptyMessage {
+  padding: 2rem;
+  text-align: center;
+  color: #888;
+  background: #f9f9f9;
+  border-radius: 4px;
+}

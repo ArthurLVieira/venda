@@ -1,0 +1,38 @@
+.searchWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 0.6rem 2.2rem 0.6rem 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: #1E88E5;
+  box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.2);
+}
+
+.clearButton {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 0 0.2rem;
+  line-height: 1;
+}
+
+.clearButton:hover {
+  color: #333;
+}
