@@ -1,0 +1,71 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 240px;
+  background-color: #7B1FA2; /* roxo escuro */
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  transition: transform 0.3s;
+}
+
+.logo {
+  padding: 0 1.5rem 2rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  margin-bottom: 1.5rem;
+}
+
+.logoText {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #FF9800; /* laranja */
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.navLink {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.8rem 1.5rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: background-color 0.2s, color 0.2s;
+  font-weight: 500;
+}
+
+.navLink:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.navLink.active {
+  background-color: rgba(255, 152, 0, 0.2);
+  color: #FF9800;
+  border-right: 4px solid #FF9800;
+}
+
+.icon {
+  font-size: 1.2rem;
+  width: 1.5rem;
+  text-align: center;
+}
+
+/* Responsivo: em telas pequenas, sidebar pode ser recolhida com um toggle (a ser implementado) */
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+  }
+  .sidebar.open {
+    transform: translateX(0);
+  }
+}

@@ -1,8 +1,8 @@
-import React, { useEffect, useRef } from 'react'
-import Button from '../Button'
-import Styles from './styles.module.css'
+import React, { useEffect, useRef } from 'react';
+import Button from '../Button';
+import Styles from './styles.module.css';
 
-interface ModelProps {
+interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   title: string;
@@ -13,18 +13,19 @@ interface ModelProps {
   size?: 'small' | 'medium' | 'large';
 }
 
-const Model: React.FC<ModelProps> = ({
-    isOpen,
-    onClose,
-    title,
-    children,
-    onConfirm,
-    confirmLabel = 'Confirmar',
-    cancelLabel = 'Cancelar',
-    size = 'medium'
+const Modal: React.FC<ModalProps> = ({
+  isOpen,
+  onClose,
+  title,
+  children,
+  onConfirm,
+  confirmLabel = 'Confirmar',
+  cancelLabel = 'Cancelar',
+  size = 'medium',
 }) => {
-    const modalRef = useRef<HTMLDivElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
 
+  // Fechar ao clicar fora
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
@@ -45,6 +46,7 @@ const Model: React.FC<ModelProps> = ({
     };
   }, [isOpen, onClose]);
 
+  // Fechar com ESC
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
@@ -82,4 +84,4 @@ const Model: React.FC<ModelProps> = ({
   );
 };
 
-export default Model;
+export default Modal;

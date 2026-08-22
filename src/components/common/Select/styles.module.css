@@ -1,0 +1,38 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  width: 100%;
+}
+
+.label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.select {
+  padding: 0.6rem 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  background-color: #fff;
+  transition: border-color 0.2s;
+  width: 100%;
+  appearance: auto;
+}
+
+.select:focus {
+  outline: none;
+  border-color: #1E88E5;
+  box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.2);
+}
+
+.select.error {
+  border-color: #E53935;
+}
+
+.errorMessage {
+  font-size: 0.8rem;
+  color: #E53935;
+}
