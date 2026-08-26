@@ -5,6 +5,10 @@ import type { ItemVenda, Venda } from "../../../types/venda";
 import { useEffect, useState } from "react";
 import { useForm } from "../../../hooks/useForm";
 import { v4 as uuidv4 } from 'uuid';
+import Styles from './styles.module.css';
+import Select from "../../common/Select";
+import Input from "../../common/Input";
+import Button from "../../common/Button";
 
 interface VendaFormProps {
     clientes: Cliente[];
@@ -97,7 +101,84 @@ const VendaForm: React.FC<VendaFormProps> = ({ clientes, produtos, onSave, onCan
         };
 
         onSave(venda);
+        setValues({clienteId: '', itens: []});
     };
 
+  const clienteOptions = clientes.map((c) => ({ value: c.id, label: c.nomeCompleto }));
+  const produtoOptions = produtos.map((p) => ({ value: p.id, label: `${p.descricao} (R$ ${p.preco.toFixed(2)})` }));
 
-}
+  return (
+    <form onSubmit={handleSubmit(onSubmit)} className={Styles.form}>
+      <Select
+        label="Cliente"
+        options={clienteOptions}
+        value={values.clienteId}
+        onChange={(val) => handleChange({ target: { name: 'clienteId', value: val } } as any)}
+        error={errors.clienteId}
+        required
+      />
+
+      <div className={Styles.itensContainer}>
+        <div className={Styles.itensHeader}>
+          <span>Produto</span>
+          <span>Preço Venda</span>
+          <span>Qtd</span>
+          <span>Subtotal</span>
+          <span></span>
+        </div>
+        {values.itens.map((item, index) => {
+          const produto = produtos.find((p) => p.id === item.produtoId);
+          const errorProduto = errors[`item_${index}_produto`] || errors[`item_${index}_estoque`];
+          return (
+            <div key={index} className={Styles.itemRow}>
+              <Select
+                options={produtoOptions}
+                value={item.produtoId}
+                onChange={(val) => updateItem(index, 'produtoId', val)}
+                error={errorProduto}
+              />
+              <Input
+                type="number"
+                step="0.01"
+                value={item.precoVenda}
+                onChange={(e) => updateItem(index, 'precoVenda', parseFloat(e.target.value) || 0)}
+                min="0.01"
+              />
+              <Input
+                type="number"
+                step="1"
+                value={item.quantidade}
+                onChange={(e) => updateItem(index, 'quantidade', parseInt(e.target.value) || 0)}
+                min="1"
+                error={errors[`item_${index}_quantidade`]}
+              />
+              <span className={Styles.subtotal}>R$ {item.subtotal.toFixed(2)}</span>
+              <Button variant="danger" size="small" onClick={() => removeItem(index)}>
+                Remover
+              </Button>
+            </div>
+          );
+        })}
+        <Button variant="secondary" onClick={addItem} type="button">
+          + Adicionar Produto
+        </Button>
+        {errors.itens && <span className={Styles.errorMessage}>{errors.itens}</span>}
+      </div>
+
+      <div className={Styles.totalContainer}>
+        <strong>Total da Venda: R$ {valorTotal.toFixed(2)}</strong>
+      </div>
+
+      <div className={Styles.actions}>
+        <Button variant="secondary" onClick={onCancel} type="button">
+          Cancelar
+        </Button>
+        <Button variant="success" type="submit">
+          Finalizar Venda
+        </Button>
+      </div>
+    </form>
+  );
+};
+
+export default VendaForm;
